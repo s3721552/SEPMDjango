@@ -1,26 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
-tour_planner = [
-	{
-		'name_location': 'Bali',
-		'xy_coordinates': '8 S, 115 E',
-		'description': 'one stop trip(temporary)',
-		'min_time_spent': '2 days'
-
-	},
-	{
-		'name_location': 'Sydney',
-		'xy_coordinates': '33 S, 151 E',
-		'description': 'one stop trip(temporary)',
-		'min_time_spent': '4 days'
-
-	}
-]
+from .models import Tour
 
 def home(request):
 	context = {
-		'tour_planner': tour_planner
+		'tour_planner': Tour.objects.all()
 	}
 	return render(request, 'robot/home.html', context)
 
