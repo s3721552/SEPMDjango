@@ -3,10 +3,10 @@ from django.http import HttpResponse
 from .models import Tour
 
 def home(request):
+	return render(request, 'robot/home.html')
+
+def tours(request):
 	context = {
 		'tour_planner': Tour.objects.all()
 	}
-	return render(request, 'robot/home.html', context)
-
-def tours(request):
-	return render(request, 'robot/tours.html', {'title': 'Tours'})
+	return render(request, 'robot/tours.html', context)

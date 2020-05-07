@@ -1,5 +1,11 @@
 {% extends "robot/base.html" %}
 
-{% block content %} asgtuivcfdrwsjkl
+{% block content %}
 	<h1>Tours Page</h1>
+	{% for tour_planner in tour_planner %}
+		<h1>{{ tour_planner.title }}</h1>
+		<p>Location: {{ tour_planner.location }}</p>
+		<p>{{ tour_planner.description }}</p>
+	{% endfor %}
+	
 {% endblock content %}
