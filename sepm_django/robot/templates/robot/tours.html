@@ -3,9 +3,16 @@
 {% block content %}
 	<h1>Tours Page</h1>
 	{% for tour_planner in tour_planner %}
-		<h1>{{ tour_planner.title }}</h1>
-		<p>Location: {{ tour_planner.location }}</p>
-		<p>{{ tour_planner.description }}</p>
+		<article class="media content-section">
+			<div class="media-body">
+				<div class="article-metadata">
+				<a class="mr-2" href="#">{{ tour_planner.location }}</a>
+				<small class="text-muted">{{ tour_planner.creator }}</small>
+				</div>
+				<h2><a class="article-title" href="#">{{ tour_planner.location }}</a></h2>
+				<p class="article-content">{{ tour_planner.description }}</p>
+			</div>
+		</article>
 	{% endfor %}
 	
 {% endblock content %}
