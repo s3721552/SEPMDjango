@@ -1,0 +1,104 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}{{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}">
+    <style>
+        .btn {
+            display: inline-block;
+            font-weight: 400;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: .25rem;
+            transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        }
+
+        .btn-info {
+            color: #fff !important;
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+
+        .btn-primary {
+            color: #fff !important;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-sm {
+            padding: .25rem .5rem;
+            font-size: .875rem;
+            line-height: 1.5;
+            border-radius: .2rem;
+        }
+    </style>
+{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+    <div id="content-main">
+
+        {% if app_list %}
+            {% for app in app_list %}
+                <div class="app-{{ app.app_label }} module">
+                    <table>
+                        <caption>
+                            <a href="{{ app.app_url }}" class="section"
+                               title="{% blocktrans with name=app.name %}Models in the {{ name }} application{% endblocktrans %}">{{ app.name }}</a>
+                        </caption>
+                        {% for model in app.models %}
+                            <tr class="model-{{ model.object_name|lower }}">
+                                {% if model.admin_url %}
+                                    <th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
+                                {% else %}
+                                    <th scope="row">{{ model.name }}</th>
+                                {% endif %}
+
+                                {% if model.add_url %}
+                                    <td>
+                                        {#<a href="{{ model.add_url }}" class="addlink">{% trans 'Add' %}</a>#}
+                                        <a href="{{ model.add_url }}" class="btn btn-primary btn-sm">{% trans 'Add' %}</a>
+                                    </td>
+                                {% else %}
+                                    <td>&nbsp;</td>
+                                {% endif %}
+
+                                {% if model.admin_url %}
+                                    {% if model.view_only %}
+                                        <td>
+                                            <a href="{{ model.admin_url }}" class="viewlink">{% trans 'View' %}</a>
+                                        </td>
+                                    {% else %}
+                                        <td>
+                                            {#a href="{{ model.admin_url }}" class="changelink">{% trans 'Change' %}</a>#}
+                                            <a href="{{ model.admin_url }}"
+                                               class="btn btn-info btn-sm">{% trans 'Change' %}</a>
+                                        </td>
+                                    {% endif %}
+                                {% else %}
+                                    <td>&nbsp;</td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>{% trans 'You don’t have permission to view or edit anything.' %}</p>
+        {% endif %}
+    </div>
+{% endblock %}
