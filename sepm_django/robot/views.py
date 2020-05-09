@@ -10,3 +10,6 @@ def tours(request):
 		'tour_planner': Tour.objects.all()
 	}
 	return render(request, 'robot/tours.html', context)
+
+def locations(request):
+	return render(request, 'robot/locations.html')
