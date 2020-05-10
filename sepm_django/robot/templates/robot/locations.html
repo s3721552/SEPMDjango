@@ -1,7 +1,19 @@
 {% extends "robot/base.html" %}
 
 {% block content %}
-
+<h2>Locations Page</h2>
+	{% for location_identify in location_identify %}
+		<article class="media content-section">
+			<div class="media-body">
+				<div class="article-metadata">
+				<a class="mr-2" href="#">{{ location_identify.location }}</a>
+				<small class="text-muted">{{ location_identify.creator }}</small>
+				</div>
+				<h2><a class="article-title" href="#">{{ location_identify.location }}</a></h2>
+				<p class="article-content">{{ location_identify.description }}</p>
+			</div>
+		</article>
+	{% endfor %}
 
 
 {% endblock content %}

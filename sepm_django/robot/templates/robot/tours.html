@@ -7,10 +7,10 @@
 			<div class="media-body">
 				<div class="article-metadata">
 				<a class="mr-2" href="#">{{ tour_planner.location }}</a>
-				<small class="text-muted">{{ tour_planner.creator }}</small>
+				<small class="text-muted">{{ tour_planner.created_by }}</small>
 				</div>
-				<h2><a class="article-title" href="#">{{ tour_planner.location }}</a></h2>
-				<p class="article-content">{{ tour_planner.description }}</p>
+				<h2><a class="article-title" href="#">{{ tour_planner.name }}</a></h2>
+				<p class="article-content">{{ tour_planner.tour_type }}</p>
 			</div>
 		</article>
 	{% endfor %}
